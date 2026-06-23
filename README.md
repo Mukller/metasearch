@@ -1,6 +1,19 @@
+[English](README_EN.md)
+
 # metasearch
 
-Self-hosted поисковый агрегатор. Запрашивает несколько поисковиков параллельно, объединяет и дедуплицирует результаты. Минимум зависимостей, никаких JS-трекеров, никакой телеметрии.
+Self-hosted поисковый агрегатор. Запрашивает несколько поисковиков параллельно,
+объединяет и дедуплицирует результаты. Без JS-трекеров, без телеметрии.
+
+## Запуск
+
+```bash
+pip install metasearch
+metasearch
+# → http://localhost:8080
+
+metasearch --port 9090 --host 0.0.0.0
+```
 
 ## Что умеет
 
@@ -11,41 +24,17 @@ Self-hosted поисковый агрегатор. Запрашивает нес
 - Простой веб-интерфейс
 - JSON API (`/api/search?q=...`)
 
-## Установка
-
-```bash
-pip install metasearch
-# или
-git clone ...
-pip install -e .
-```
-
-## Запуск
-
-```bash
-metasearch
-# Сервер на http://localhost:8080
-
-metasearch --port 9090 --host 0.0.0.0
-```
-
 ## API
 
 ```bash
-# Поиск через JSON API
 curl "http://localhost:8080/api/search?q=python+asyncio&engines=ddg,brave"
+```
 
-# Ответ:
+```json
 {
   "query": "python asyncio",
   "results": [
-    {
-      "title": "...",
-      "url": "...",
-      "snippet": "...",
-      "score": 3,
-      "sources": ["ddg", "brave"]
-    }
+    { "title": "...", "url": "...", "snippet": "...", "score": 3, "sources": ["ddg", "brave"] }
   ],
   "total": 15,
   "took_ms": 420
